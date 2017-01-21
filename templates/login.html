@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form-signin" method="post">
+  <h2 class="form-signin-heading">Login</h2>
+
+  <label for="username" class="sr-only">Username</label>
+  <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+
+  <label for="password" class="sr-only">Password</label>
+  <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+  
+  {% if login_error_msg %}
+  <div class="alert alert-danger" role="alert">{{login_error_msg}}</div>
+  {% endif %}
+
+  <div class="form-signin-checkbox">
+    <input type="checkbox" id="remember-me" name="remember-me" value="remember-me" checked="checked">
+    <label for="remember-me" class="">로그인 상태 유지</label>
+  </div>
+  
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+  <div class="text-center">or</div>
+  <a href="/signup" class="btn btn-lg btn-default btn-block" role="button">Signup</a>
+</form>
+
+<a href="/blog">Go Blog</a>
+
+{% endblock %}

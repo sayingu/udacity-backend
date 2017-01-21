@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sayingu Blog</title>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link type="text/css" rel="stylesheet" href="/css/main.css" />
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-right">
+			{% if user %}
+		      <p class="navbar-text">{{user.username}}</p><a href="/logout" class="btn btn-danger navbar-btn" role="button">logout</a>
+		    {% else %}
+		      <a href="/login" class="btn btn-primary navbar-btn" role="button">login</a>
+		      <a href="/signup" class="btn btn-default navbar-btn" role="button">signup</a>
+		    {% endif %}
+		    </div>
+	    </div>
+	</nav>
+	<div class="container">
+		<div class="blog-header">
+			<h1 class="blog-title">Sayingu Blog</h1>
+			<p class="lead blog-description">상호♡유미 가족 블로그 (세희, 혜리)</p>
+		</div>
+		
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+</html>

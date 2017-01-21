@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="form-signup" method="post">
+  <h2>Signup</h2>
+
+  <div class="form-group {% if username_error_msg %}has-error{% endif %}">
+    <label class="control-label" for="username">Username</label>
+    <input type="text" id="username" name="username" class="form-control" placeholder="Username" value="{{username}}">
+    <span class="help-block">{{username_error_msg}}</span>
+  </div>
+
+  <div class="form-group {% if password_error_msg %}has-error{% endif %}">
+    <label class="control-label" for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+    <span class="help-block">{{password_error_msg}}</span>
+  </div>
+
+  <div class="form-group {% if verify_error_msg %}has-error{% endif %}">
+    <label class="control-label" for="verify">Password verify</label>
+    <input type="password" id="verify" name="verify" class="form-control" placeholder="Password verify">
+    <span class="help-block">{{verify_error_msg}}</span>
+  </div>
+
+  <div class="form-group {% if email_error_msg %}has-error{% endif %}">
+    <label class="control-label" for="email">Email (optional)</label>
+    <input type="text" id="email" name="email" class="form-control" placeholder="Email (optional)" value="{{email}}">
+    <span class="help-block">{{email_error_msg}}</span>
+  </div>
+
+  <button class="btn btn-lg btn-default btn-block" type="submit">Signup</button>
+  <div class="text-center">or</div>
+  <a href="/login" class="btn btn-lg btn-primary btn-block" role="button">Login</a>
+</form>
+
+<a href="/blog">Go Blog</a>
+
+{% endblock %}

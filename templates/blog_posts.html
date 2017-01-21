@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="/blog/newpost" class="btn btn-default" role="button">NEW POST</a>
+
+{% for post in posts %}
+<div class="blog-post" id="{{post.key().id()}}">
+	<div class="blog-post-edit">
+		{% if user and post.username == user.username %}
+		<a href="/blog/{{post.key().id()}}/edit" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+		<a href="/blog/{{post.key().id()}}/delete" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+		{% endif %}
+	</div>
+	<h2 class="blog-post-title">{{post.subject}}</h2>
+	<p class="blog-post-meta">{{post.last_modified.strftime("%b %d, %Y")}} by <b>{{post.username}}</b></p>
+
+	<p>{{post.content.replace("\n", "<br />") | safe}}</p>
+
+	<div class="blog-post-like">
+		<a href="/blog/{{post.key().id()}}/like" class="btn btn-success {% if user and post.username == user.username %}disabled{% endif %}" role="button">
+			{% if user and post._get_like(post.key().id(), user.username) %}
+			<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+			{% else %}
+			<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+			{% endif %}
+			&nbsp;<span class="badge">{{post.like}}</span>
+		</a>
+	</div>
+
+	<div class="blog-comment">
+		<div class="blog-comments">	
+			<a href="/blog/{{post.key().id()}}/newcomment" class="btn btn-sm btn-default" role="button">NEW COMMENT</a>
+		</div>
+
+		{% for comment in post._get_comments(post.key().id()) %}
+		<div class="blog-comments">
+			<p class="blog-comment-meta">{{comment.created.strftime("%b %d, %Y")}} by <b>{{comment.username}}</b></p>
+
+			<p>{{comment.content.replace("\n", "<br />") | safe}}</p>
+
+			<div>
+				{% if user and comment.username == user.username %}
+				<a href="/blog/{{post.key().id()}}/{{comment.key().id()}}/edit" class="btn btn-sm btn-primary" role="button">EDIT COMMENT</a>
+				<a href="/blog/{{post.key().id()}}/{{comment.key().id()}}/delete" class="btn btn-sm btn-danger" role="button">DELETE COMMENT</a>
+				{% endif %}
+			</div>
+		</div>
+		{% endfor %}
+
+	</div>
+</div>
+{% endfor %}
+
+{% endblock %}

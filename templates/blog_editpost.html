@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{% if post_id %}Edit{% else %}New{% endif %} Post</h2>
+<form method="post">
+	<div class="form-group {% if error_msg %}has-error{% endif %}">
+		<label class="control-label" for="subject">Subject</label>
+    	<input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" value="{{subject}}">
+    </div>
+
+    <div class="form-group {% if error_msg %}has-error{% endif %}">
+		<label class="control-label" for="content">Content</label>
+		<textarea id="content" name="content" class="form-control" rows="8">{{content}}</textarea>
+    	
+		<span class="help-block">{{error_msg}}</span>
+	</div>
+
+	<button class="btn btn-lg btn-primary" type="submit">SAVE</button>
+	<a href="/blog#{{post_id}}" class="btn btn-lg btn-default" role="button">CANCEL</a>	
+</form>
+
+{% endblock %}
